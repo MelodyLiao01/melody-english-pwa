@@ -1,0 +1,211 @@
+/* ==========================================================================
+   🎨 1. 全局初始化與變數設定 (Reset & Variables)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* 移除手機點擊時的藍色醜邊框 */
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #121316 0%, #1a1c23 100%);
+    color: #f3f4f6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* 處理 iPhone 瀏海屏與底部安全區 */
+    padding: calc(env(safe-area-inset-top) + 20px) 20px calc(env(safe-area-inset-bottom) + 20px) 20px;
+}
+
+/* 📱 主容器：限制最大寬度，在電腦上看也會維持手機比例 */
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ==========================================================================
+   🏷️ 2. 頂部問候語區 (Header)
+   ========================================================================== */
+.app-header {
+    margin-top: 10px;
+}
+
+.welcome-text {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #ffffff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle-text {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   🔥 3. 儀表板數據卡片 (Dashboard)
+   ========================================================================== */
+.dashboard-section {
+    display: flex;
+    gap: 16px;
+}
+
+.stat-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.stat-card:active {
+    transform: scale(0.98); /* 手機按壓時的微幅下沉感 */
+}
+
+.stat-icon {
+    font-size: 24px;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+}
+
+/* 幫連續天數塗上溫暖的火焰橘 */
+.streak-card .stat-value {
+    color: #ff9f0a;
+}
+
+/* 幫累積次數塗上成長的活力綠 */
+.total-card .stat-value {
+    color: #30d158;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #6b7280;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   📖 4. 核心功能按鈕 (Buttons)
+   ========================================================================== */
+.action-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.primary-btn {
+    width: 100%;
+    min-height: 52px; /* 符合大拇指熱區與點擊標準 */
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    border: none;
+    border-radius: 16px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.3);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 按鈕互動特效 */
+.primary-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px 0 rgba(79, 70, 229, 0.2);
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   🃏 5. 3D 翻轉卡片核心效果 (3D Flip Cards)
+   ========================================================================== */
+#card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+/* 3D 舞台：給予卡片旋轉時的立體透視深度 */
+.card-stage {
+    perspective: 1200px;
+    width: 100%;
+    height: 130px; /* 固定高度，排版更整齊 */
+}
+
+/* 卡片本體 */
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* 帶有微彈簧感的高級動畫 */
+}
+
+/* ✨ 當被 JS 加上 .is-flipped 時，水平翻轉 180 度 */
+.card-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+/* 卡片正面與背面的共享構造 */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* ➔ 關鍵：翻過去後，背面要隱藏正面 */
+    -webkit-backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 🟢 卡片正面：優雅的暗色毛玻璃 */
+.card-front {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f3f4f6;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* 🟠 卡片背面：質感墨綠，預先轉好 180 度在那裡等 */
+.card-back {
+    background: rgba(48, 209, 88, 0.06);
+    border: 1px solid rgba(48, 209, 88, 0.25);
+    color: #30d158;
+    transform: rotateY(180deg);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 400;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Melody's English Streak</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EnglishStreak">
+    <link rel="apple-touch-icon" href="assets/icon-180.png">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="app-header">
+            <h1 class="welcome-text">Hi, Melody 👋</h1>
+            <p class="subtitle-text">今天也是充滿質感的一天，準備好打卡了嗎？</p>
+        </header>
+
+        <section class="dashboard-section">
+            <div class="stat-card streak-card">
+                <span class="stat-icon">🔥</span>
+                <div class="stat-info">
+                    <span class="stat-value" id="streak-days">--</span>
+                    <span class="stat-label">連續天數</span>
+                </div>
+            </div>
+            <div class="stat-card total-card">
+                <span class="stat-icon">📈</span>
+                <div class="stat-info">
+                    <span class="stat-value" id="total-count">--</span>
+                    <span class="stat-label">累積練習</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="action-section">
+            <button id="fetch-btn" class="primary-btn">
+                <span>📖 探索今日職場句型 (隨機 5 個)</span>
+            </button>
+            
+            <div id="card-container"></div>
+        </section>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
