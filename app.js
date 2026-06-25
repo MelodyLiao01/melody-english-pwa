@@ -1,7 +1,7 @@
 // ==========================================================================
 // 🚀 1. 設定你的 GAS API 網址與安全暗號
 // ==========================================================================
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxRiFJIqtXrecqqm6eAhW5svFkyNiHXIAZQCpR8_bSdK2x4-WmGhP5tdIhoAfMERaxCWA/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbww6AnITWn7eUSpSFTbvZyrCHpZR7sULjhBdf9MLrxU769FTsZSShCx9fQKN21XUQSI1Q/exec";
 
 // 🔒 與 GAS 後台對齊的安全暗號（若之後在 GAS 修改了暗號，記得這裡也要同步修改）
 const API_KEY = "melodyKOKOKO123"; 
